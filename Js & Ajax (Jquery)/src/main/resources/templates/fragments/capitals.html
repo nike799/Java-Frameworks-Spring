@@ -1,0 +1,23 @@
+<th:block th:fragment>
+    <div class="capitals-container" style="visibility: hidden">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--/*@thymesVar id="viruses" type="residentevil.domain.entities.Virus"*/-->
+            <tr th:each="capital,iter : ${capitals}">
+                <td th:text="${iter.index + 1}"></td>
+                <td th:text="${capital.name}"></td>
+                <td th:text="${capital.latitude}"></td>
+                <td th:text="${capital.longitude}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</th:block>

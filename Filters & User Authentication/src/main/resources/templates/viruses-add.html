@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="~{fragments/head}"></th:block>
+</head>
+<body class="container-fluid">
+<th:block th:include="~{fragments/navbar-admin}"></th:block>
+<main>
+    <div class="container mt-4" >
+        <h1>Spread a new Virus!</h1><br/>
+        <!--/*@thymesVar id="virusAddBindingModel" type="residentevil.domain.models.binding.VirusAddBindingModel"*/-->
+        <form th:action="@{/viruses/add}" th:method="post" th:object="${virusAddBindingModel}">
+            <div class="form-group" th:classappend="${#fields.hasErrors('name')} ? 'text-danger'">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter virus name">
+                <small th:each="error : ${#fields.errors('name')}" th:text="${error}"></small>
+            </div>
+            <div class="form-group" th:classappend="${#fields.hasErrors('description')} ? 'text-danger'">
+                <label for="description">Description</label><br/>
+                <textarea id="description" name="description" style="width: 100%"></textarea>
+                <small th:each="error : ${#fields.errors('description')}" th:text="${error}"></small>
+            </div>
+            <div class="form-group" th:classappend="${#fields.hasErrors('sideEffects')} ? 'text-danger'">
+                <label for="sideEffects">Side Effect</label>
+                <input type="text" class="form-control" id="sideEffects" name="sideEffects" placeholder="Enter side effect">
+                <small th:each="error : ${#fields.errors('sideEffects')}" th:text="${error}"></small>
+            </div>
+            <div class="form-group" th:classappend="${#fields.hasErrors('creator')} ? 'text-danger'">
+                <label for="creator">Creator</label>
+                <input type="text" class="form-control" id="creator" name="creator"  placeholder="Enter creator">
+                <small th:each="error : ${#fields.errors('creator')}" th:text="${error}"></small>
+            </div>
+            <div class="form-group">
+                <input class="form-check-input" type="checkbox" id="isDeadly" name="deadly">
+                <label class="form-check-label" for="isDeadly">Is Deadly?</label>
+            </div>
+            <div class="form-group">
+                <input class="form-check-input" type="checkbox" id="isCurable" name="curable">
+                <label class="form-check-label" for="isCurable">Is Curable?</label>
+            </div>
+            <!--/*@thymesVar id="Mutation" type="residentevil.domain.enums.Mutation"*/-->
+            <th:block
+                    th:each="mutation : ${T(residentevil.domain.enums.Mutation).values()}">
+                <div class="form-group mt-3" th:classappend="${#fields.hasErrors('mutation')} ? 'text-danger'">
+                    <input type="radio" class="form-check-input" id="mutation" name="mutation" th:value="${mutation}">
+                    <label class="form-check-label" for="mutation" th:text="${mutation}"></label>
+                    <small th:each="error : ${#fields.errors('mutation')}" th:text="${error}"></small>
+                </div>
+            </th:block>
+            <div class="form-group" th:classappend="${#fields.hasErrors('turnoverRate')} ? 'text-danger'">
+                <label for="turnoverRate">Turnover Rate</label>
+                <input type="number" class="form-control" id="turnoverRate" name="turnoverRate" placeholder="Enter turnover rate">
+                <small th:each="error : ${#fields.errors('turnoverRate')}" th:text="${error}"></small>
+            </div>
+            <div class="form-group" th:classappend="${#fields.hasErrors('hoursUntilTurn')} ? 'text-danger'">
+                <label for="hoursUntilTurn">Hours Until Turn</label>
+                <input type="number" class="form-control" id="hoursUntilTurn" name="hoursUntilTurn" placeholder="Enter hours until turn">
+                <small th:each="error : ${#fields.errors('hoursUntilTurn')}" th:text="${error}"></small>
+            </div>
+            <div class="form-group" th:classappend="${#fields.hasErrors('magnitude')} ? 'text-danger'">
+                <label for="magnitude">Magnitude</label>
+                <select class="custom-select" id="magnitude" name="magnitude">
+                    <th:block th:each="magnitute : ${T(residentevil.domain.enums.Magnitude).values()}">
+                        <option th:text="${magnitute}"></option>
+                    </th:block>
+                </select>
+            </div>
+            <div class="form-group" th:classappend="${#fields.hasErrors('releasedOn')} ? 'text-danger'">
+                <label for="releasedOn">Release Date</label>
+                <input type="date" class="form-control" id="releasedOn" name="releasedOn">
+                <small th:each="error : ${#fields.errors('releasedOn')}" th:text="${error}"></small>
+            </div>
+            <div class="form-group mb-5">
+                <label for="affectedCapitals">Affected Capitals</label>
+                <select class="custom-select" id="affectedCapitals" name="capitalsId" multiple>
+                    <th:block th:each="capital : ${capitals}">
+                        <option th:text="${capital.name}" th:value="${capital.id}"></option>
+                    </th:block>
+                </select>
+            </div>
+            <input th:type="submit" class="btn-danger mb-5" th:value="|Add Virus|">
+        </form>
+    </div>
+</main>
+<div/>
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/propre.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>
+

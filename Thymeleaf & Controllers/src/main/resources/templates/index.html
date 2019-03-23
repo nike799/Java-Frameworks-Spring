@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+ <th:block th:include="~{fragments/head}"></th:block>
+</head>
+<body class="container-fluid">
+<th:block th:include="~{fragments/navbar}"></th:block>
+<main>
+ <div class="jumbotron re-background">
+  <h1>Project: Resident Evil</h1><br/>
+  <p>Resident Evil is a system that registers virus spreads across the world</p>
+ </div>
+</main>
+<div/>
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/propre.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

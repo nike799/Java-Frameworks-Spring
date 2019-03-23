@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="~{fragments/head}"></th:block>
+</head>
+<body>
+<div class="container-fluid">
+    <th:block th:if="${isUser}" th:include="~{fragments/navbar-user}"></th:block>
+
+    <th:block th:if="${isAdmin || isModerator}" th:include="~{fragments/navbar-admin}"></th:block>
+    <main>
+        <div class="container mt-4">
+            <h1 th:text="Hello + ', ' + ${principal.username} + '!'"></h1><br/>
+        </div>
+    </main>
+</div>
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/propre.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>
+

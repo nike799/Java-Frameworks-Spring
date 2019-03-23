@@ -1,0 +1,40 @@
+<th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml"
+>
+    <nav class="navbar navbar-expand-lg re-background">
+        <a class="navbar-brand" th:href="@{/}">Resident Evil</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link text-white" th:href="@{/home}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Viruses
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" th:href="@{/viruses/show}">Show</a>
+                        <a class="dropdown-item" th:href="@{/viruses/add}">Add</a>
+                    </div>
+                </li>
+                <th:block th:if="${isAdmin}">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" th:href="@{/users/all}">Users </a>
+                    </li>
+                </th:block>
+            </ul>
+            <ul class="navbar-nav float-right">
+                <li class="nav-item">
+                    <form th:method="post" th:action="@{/logout}">
+                        <input type="submit" th:value="Logout" style="background-color: #900C45; color: white">
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</th:block>

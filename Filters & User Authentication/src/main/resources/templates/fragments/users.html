@@ -1,0 +1,26 @@
+<th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="viruses-container">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Username</th>
+                <th>Email</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="user,iter : ${users}">
+                <td th:text="${iter.index + 1}"></td>
+                <td th:text="${user.username}"></td>
+                <td th:text="${user.email}"></td>
+                <td>
+                    <form th:action="@{/users/edit-permission/__${user.id}__}" method="get">
+                        <button class="btn btn-primary">Edit Permission</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</th:block>

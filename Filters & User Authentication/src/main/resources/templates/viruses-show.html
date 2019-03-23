@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="~{fragments/head}"></th:block>
+</head>
+<body class="container-fluid">
+<th:block th:if="${!isAdmin && !isModerator}" th:include="~{fragments/navbar-user}"></th:block>
+
+<th:block th:if="${isAdmin || isModerator}" th:include="~{fragments/navbar-admin}"></th:block>
+<main>
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <h2 id="your-choice">Your choice</h2>
+            <span class="ml-5" style="float: right; display: block">
+            <input type="radio" id="radioButton-viruses" name="virus-controls">
+            <label for="radioButton-viruses"
+                   style="color: black; font-family: bold,serif; font-size: large">Viruses</label>
+            </span>
+            <span style="float: right; display: block">
+            <input type="radio" id="radioButton-capitals" name="virus-controls">
+            <label for="radioButton-capitals"
+                   style="color: black; font-family: bold,serif; font-size: large">Capitals</label>
+            </span>
+            <br/>
+            <hr/>
+            <h2 id="sentence-select">Select, what data you want to visualize!</h2>
+            <th:block th:include="~{fragments/viruses}"></th:block>
+            <th:block th:include="~{fragments/capitals}"></th:block>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+</main>
+<div/>
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/propre.js}"></script>
+<script th:src="@{/js/viruses-show.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>
