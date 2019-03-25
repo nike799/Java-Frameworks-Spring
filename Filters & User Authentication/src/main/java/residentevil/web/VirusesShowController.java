@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import residentevil.domain.models.binding.VirusEditBindingModel;
+import residentevil.domain.models.view.CapitalViewModel;
 import residentevil.domain.models.view.VirusViewModel;
 import residentevil.service.CapitalService;
 import residentevil.service.VirusService;
@@ -34,7 +35,19 @@ public class VirusesShowController extends BaseController {
         return this.view("viruses-show", modelAndView);
     }
 
-    @PostMapping("/delete/{id}")
+    @GetMapping(value = "/fetch-viruses", produces = "application/json")
+    @ResponseBody
+    public List<VirusViewModel> fetchViruses() {
+        return List.of(this.modelMapper.map(this.virusService.findAllViruses().toArray(), VirusViewModel[].class));
+    }
+
+    @GetMapping(value = "/fetch-capitals", produces = "application/json")
+    @ResponseBody
+    public List<CapitalViewModel> fetchCapitals() {
+        return List.of(this.modelMapper.map(this.capitalService.findAllCapitals().toArray(), CapitalViewModel[].class));
+    }
+
+    @GetMapping(value = "/delete/{id}")
     @PreAuthorize(value = "hasAnyAuthority('MODERATOR','ADMIN')")
     public ModelAndView deleteVirus(@PathVariable Long id) {
         this.virusService.delete(id);

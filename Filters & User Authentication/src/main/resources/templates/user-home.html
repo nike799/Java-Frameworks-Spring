@@ -10,7 +10,7 @@
 
     <th:block th:if="${isAdmin || isModerator}" th:include="~{fragments/navbar-admin}"></th:block>
     <main>
-        <div class="container mt-4">
+        <div class="container mt-4 text-center">
             <h1 th:text="Hello + ', ' + ${principal.username} + '!'"></h1><br/>
         </div>
     </main>

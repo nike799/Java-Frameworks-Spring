@@ -11,6 +11,7 @@ import residentevil.domain.entities.User;
 import residentevil.domain.models.service.UserServiceModel;
 import residentevil.repository.RoleRepository;
 import residentevil.repository.UserRepository;
+
 import java.util.*;
 
 @Service
@@ -57,7 +58,37 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserServiceModel> getAllUsers() {
-        return List.of(this.modelMapper.map(this.userRepository.findAll().toArray(),UserServiceModel[].class));
+        return List.of(this.modelMapper.map(this.userRepository.findAll().toArray(), UserServiceModel[].class));
+    }
+
+    @Override
+    public UserServiceModel findUserById(Long id) {
+        User user = this.userRepository.findById(id).orElse(null);
+        return user != null ? this.modelMapper.map(user, UserServiceModel.class) : null;
+    }
+
+    @Override
+    public void editUserPermissions(UserServiceModel userServiceModel, Set<Role> roles) {
+        User user = this.userRepository.findById(userServiceModel.getId()).orElse(null);
+        if (user != null) {
+            this.modelMapper.map(userServiceModel, user);
+            if (roles.stream().anyMatch(role -> role.getAuthority().equals("ADMIN"))) {
+                if (user.getAuthorities().stream().noneMatch(role -> role.getAuthority().equals("ADMIN"))) {
+                    user.getAuthorities().add(this.roleRepository.findByAuthority("ADMIN"));
+                }
+
+            } else {
+                user.getAuthorities().removeIf(role -> role.getAuthority().equals("ADMIN"));
+            }
+            if (roles.stream().anyMatch(role -> role.getAuthority().equals("MODERATOR"))) {
+                if (user.getAuthorities().stream().noneMatch(role -> role.getAuthority().equals("MODERATOR"))) {
+                    user.getAuthorities().add(this.roleRepository.findByAuthority("MODERATOR"));
+                }
+            } else {
+                user.getAuthorities().removeIf(role -> role.getAuthority().equals("MODERATOR"));
+            }
+        }
+        this.userRepository.save(user);
     }
 
     private void seedRolesIntoDB() {

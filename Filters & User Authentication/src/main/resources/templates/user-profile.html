@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="~{fragments/head}"></th:block>
+</head>
+<body>
+<div class="container-fluid">
+    <th:block th:include="~{fragments/navbar-admin}"></th:block>
+    <main>
+        <!--/*@thymesVar id="userViewModel" type="residentevil.domain.models.view.UserViewModel"*/-->
+        <div class="container mt-4" th:object="${userViewModel}">
+            <form th:action="@{/users/edit-permission}" th:method="post">
+                <div class="form-group">
+                    <!--/*@thymesVar id="username" type="residentevil.domain.models.view.UserViewModel"*/-->
+                    <input class="form-control" type="hidden" name="id" th:field="${userViewModel.id}">
+                </div>
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input class="form-control" type="text" id="username" name="username" th:field="${userViewModel.username}">
+                </div>
+                <div class="form-group">
+                    <label for="username">Email:</label>
+                    <input class="form-control" type="text" id="email" name="email"  th:field="${userViewModel.email}">
+                </div>
+                <div class="form-group">
+                    <input class="form-check-input" type="checkbox" id="admin" name="isAdmin"
+                           th:field="${userViewModel.admin}">
+                    <label class="form-check-label" for="admin">Make Admin</label>
+                </div>
+                <div class="form-group">
+                    <input class="form-check-input" type="checkbox" id="moderator" name="isModerator"
+                           th:field="${userViewModel.moderator}">
+                    <label class="form-check-label" for="moderator">Make Moderator</label>
+                </div>
+                <input type="submit" class="btn btn-primary" value="Save Changes">
+            </form>
+        </div>
+    </main>
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/propre.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

@@ -10,7 +10,7 @@
     <div class="container mt-4" >
         <h1>Spread a new Virus!</h1><br/>
         <!--/*@thymesVar id="virusAddBindingModel" type="residentevil.domain.models.binding.VirusAddBindingModel"*/-->
-        <form th:action="@{/viruses/add}" th:method="post" th:object="${virusAddBindingModel}">
+        <form th:action="@{/viruses/add}" th:method="post" th:object="${virusAddBindingModel}" autocomplete="on">
             <div class="form-group" th:classappend="${#fields.hasErrors('name')} ? 'text-danger'">
                 <label for="name">Name</label>
                 <input type="text" class="form-control" id="name" name="name" placeholder="Enter virus name">

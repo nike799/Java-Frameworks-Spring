@@ -1,17 +1,13 @@
-package residentevil.domain.models.view;
+package residentevil.domain.models.binding;
 
-import residentevil.domain.entities.Role;
-
-import java.util.Set;
-
-public class UserViewModel {
+public class UserEditPermissionBindingModel {
     private Long id;
     private String username;
     private String email;
     private Boolean isAdmin;
     private Boolean isModerator;
 
-    public UserViewModel() {
+    public UserEditPermissionBindingModel() {
     }
 
     public Long getId() {
@@ -41,6 +37,7 @@ public class UserViewModel {
     public Boolean getAdmin() {
         return isAdmin;
     }
+
     public void setAdmin(Boolean admin) {
         isAdmin = admin;
     }
@@ -52,5 +49,4 @@ public class UserViewModel {
     public void setModerator(Boolean moderator) {
         isModerator = moderator;
     }
-
 }

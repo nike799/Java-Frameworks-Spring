@@ -14,9 +14,9 @@
                 <td th:text="${iter.index + 1}"></td>
                 <td th:text="${user.username}"></td>
                 <td th:text="${user.email}"></td>
-                <td>
-                    <form th:action="@{/users/edit-permission/__${user.id}__}" method="get">
-                        <button class="btn btn-primary">Edit Permission</button>
+                <td th:if="${currentUser != user.username}">
+                    <form th:action="@{/users/edit-permission/__${user.id}__}" th:method="get">
+                    <button class="btn btn-primary" type="submit" >Edit Permission</button>
                     </form>
                 </td>
             </tr>

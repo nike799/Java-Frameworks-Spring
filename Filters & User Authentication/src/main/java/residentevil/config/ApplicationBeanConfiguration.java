@@ -29,6 +29,6 @@ public class ApplicationBeanConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(userAccessInterceptor).addPathPatterns("/home","/viruses/show","/viruses/add","/viruses/edit/*","/users/all");
+        registry.addInterceptor(userAccessInterceptor).addPathPatterns("/home","/viruses/show","/viruses/add","/viruses/edit/*","/users/all","/users/edit-permission/*");
     }
 }
